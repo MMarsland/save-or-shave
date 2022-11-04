@@ -1,20 +1,14 @@
 const express = require("express");
-const axios = require("axios");
 const path = require("path");
-const bodyParser = require("body-parser");
 const puppeteer = require('puppeteer')
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 let initialTotalAmount = ""
 let donations = []
-let print_donation = []
-
 
 async function scrapeTotalAmount() {
     try {
@@ -85,32 +79,28 @@ async function scrapeDonations() {
     }
 }
 
+scrapeTotalAmount()
+scrapeDonations()
+
 app.get("/", async (req, res) => {
-    res.render("main", {
-        totalAmount: initialTotalAmount
-    });
+    res.render("main");
 });
 
-/** 
-app.get("/donations", async (req, res) => {
+app.get("/reloadDonations", async (req, res) => {
     await scrapeTotalAmount()
     await scrapeDonations()
     res.render("donations", { donations: donations });
-});*/
+});
 
-app.get('/donations', async (req, res) => {
+app.get("/donations", async (req, res) => {
+    res.render("donations", { donations: donations });
+});
+
+app.get('/fetch', async (req, res) => {
     await scrapeTotalAmount()
     await scrapeDonations()
     res.json({ donations: donations })
 })
-
-app.get("/cup", async (req, res) => {
-    res.render("cup");
-});
-
-app.get("/loading", async (req, res) => {
-    res.render("loading");
-});
 
 app.listen(3000, () => {
     console.log("server started on port 3000");
