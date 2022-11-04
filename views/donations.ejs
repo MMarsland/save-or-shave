@@ -1,0 +1,15 @@
+<%- include('header.ejs') %>
+
+<div id="content">
+  <ul class="donations no-bullets">
+    <% donations.forEach(function(donation) { %>
+    <li class="donation">
+      <h1><%=donation.donator%></h1>
+      <h2><%=donation.amount%></h2>
+      <p class="donation-message"><%=donation.message%></p>
+    </li>
+    <% })%>
+  </ul>
+</div>
+
+<%- include('footer.ejs') %>

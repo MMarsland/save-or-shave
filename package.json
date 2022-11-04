@@ -1,0 +1,22 @@
+{
+  "name": "save-or-shave",
+  "version": "1.0.0",
+  "description": "A demo project for my Movember 2022 fundraising campaign.",
+  "main": "crawler.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.8",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.20",
+    "puppeteer": "^19.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js -e js,ejs,css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
