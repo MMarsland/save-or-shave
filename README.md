@@ -1,16 +1,22 @@
 # Save-Or-Shave
 
-A demo project for my Movember 2022 fundraising campaign.
+A demo project for my Movember 2022 fundraising campaign. (May not be completed until 2023, or perhaps will be slightly improved each year)
 
-The idea is that the website will scrape data from the Movember donations page and allow people to donate to vote to Save or Shave my moustache using keyworkds in their donation message.
+The idea is that the website will scrape data from the Movember donations page and allow people to donate to vote to Save or Shave my moustache using keywords in their donation message.
 
 The website will graphically display the running results of the donation campaign and direct people to the Movember page to make direct donations.
+
+## Usage
+- Follow Tutorials listed below to install the required NodeJS packages (Node, npm, express, puppeteer, etc...)
+- Use "npm start" to start the server (in dev mode with nodemon to auto-reload)
+- go to "localhost:3000" to view the hosted package
+- Will eventually be using Heroku to host the webpage (Or google hosting is possible too (I think))
 
 ## TODO
 
 - Refactor async puppeteer functions to parse data into sided data with amounts (Use "pseudo" parsing on arbitrary keyword for now (~ "keep" vs "b"))
 
-- Visulaiztion of Data, (Sideways thermo with Date?) (Calendar with fill?) (Start with bar with date, Build with SVGs? Sketch? Fill Background, css     positioning of text, etc...)
+- Visualization of Data, (Sideways thermo with Date?) (Calendar with fill?) (Start with bar with date, Build with SVGs? Sketch? Fill Background, css     positioning of text, etc...)
 
 - Parsing of data from set to side amounts
 - Username / URL passing to work for any Movember user
