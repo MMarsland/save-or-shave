@@ -1,51 +1,30 @@
+:root {
+  --background-color: #262626;
+  --primary-blue: #2171B4;
+  --text-white: #fff;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
 }
 
 html {
   font-size: 62.5%;
+  height: 100%;
+  width: 100%
 }
 
 body {
   font-family: "Lato", "Helvetica", Helvetica, sans-serif;
-  background: #262626;
-  color: #5f1ef7;
+  background: var(--background-color);
+  color: var(--primary-blue);
   font-size: 1.8rem;
-  padding: 1.2rem;
   letter-spacing: 1px;
-}
-
-.login-form {
-  width: 60%;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  font-size: 2.2rem;
-}
-
-.login-form form {
-  width: 40%;
-}
-
-.form-control {
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
-.form-control label {
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.form-control input {
-  padding: 0.375rem 0.75rem;
-  width: 100%;
-  font-size: 1.3rem;
-  line-height: 2;
+  height: 100%;
+  width: 100%
 }
 
 .btn {
@@ -58,8 +37,8 @@ body {
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  color: #fff;
-  background-color: #007bff;
+  color: var(--text-white);
+  background-color: var(--primary-blue);
   cursor: pointer;
 }
 
@@ -68,16 +47,10 @@ body {
   margin-bottom: 1rem;
 }
 
-ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
-}
 
+/* Custom Styles */
 
-
-
-/* Cup / Loading annimation */
+/* Cup / Loading animation */
 .cup {
   position: absolute;
   top: 50%;
@@ -114,3 +87,160 @@ ul.no-bullets {
   50% {background-position: 1700px 50px;}
   100% {background-position: 200px 150px;}
 }
+
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  height: 100%;
+  width: 100%;
+}
+
+.loadingText {
+  width: fit-content;
+  color: var(--text-white);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#content {
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  position: absolute;
+  font-family: Georgia, serif;
+  font-size: 80px;
+  top: 50px;
+  color: var(--text-white);
+}
+
+.centered-container {
+  position: absolute;
+}
+
+#thermometer {
+  position: relative;
+  overflow: hidden;
+}
+
+svg {
+  z-index: 2;
+  position: relative;
+}
+
+#thermo {
+  position: relative;
+  z-index: 3;
+}
+
+#thermoOutside {
+  fill: var(--background-color);
+  position: relative;
+  z-index: 2;
+}
+
+#dateLabels {
+  font-family: Georgia, serif;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px -50px 0px -40px;
+  color: var(--text-white);
+}
+
+#dateLabels > h4 {
+  position: absolute;
+  transform: translate(-50%, 0);
+}
+
+.endDateLabelContainer {
+  position: relative;
+}
+
+#endDateLabel {
+  font-family: Georgia, serif;
+  margin: 0px 0 10px 5px;
+  color: var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.label {
+  position: absolute;
+  font-family: Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#shaveLabel {
+  top: 60px;
+  left: -120px;
+  color: var(--primary-blue);
+}
+
+#saveLabel {
+  top: 60px;
+  right: -100px;
+  color: var(--primary-blue);
+}
+
+#wave {
+  rotate: 90deg;
+  height: 100px;
+  width: 90px;
+  scale: 1 0.4;
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  z-index: 1;
+  background: url(https://image.ibb.co/fmHm66/wave.png);
+  background-size: cover;
+  background-repeat: repeat-x;
+  animation: wave-motion 30s ease-in-out infinite; /* wave-fill 3s ease-in-out forwards */
+  transition: all 3s;
+  transform-origin: left top;
+}
+
+@keyframes wave-motion {
+  0% {background-position: 0px 0px;}
+  50% {background-position: 1000px 0px;}
+  100% {background-position: 0px 0px;}
+}
+
+#fill {
+  height: 90px;
+  width: 0px;
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  z-index: 1;
+  background: var(--primary-blue);
+  transition: all 3s;
+  z-index: 1;
+}
+

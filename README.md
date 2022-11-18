@@ -14,17 +14,20 @@ The website will graphically display the running results of the donation campaig
 
 ## TODO
 
-- Refactor async puppeteer functions to parse data into sided data with amounts (Use "pseudo" parsing on arbitrary keyword for now (~ "keep" vs "b"))
-
-- Visualization of Data, (Sideways thermo with Date?) (Calendar with fill?) (Start with bar with date, Build with SVGs? Sketch? Fill Background, css     positioning of text, etc...)
-
-- Parsing of data from set to side amounts
 - Username / URL passing to work for any Movember user
-- Decision on donation text Keywording
-- Implement Production level loading page behaviour with proper urls
+- Add Username label
+
+- Update Loading Page (Moustashe logo filling instead of cup)
+
+- Add phone version with vertical thermo?
+
+- Decision on donation text Keywording (SHAVE, vs SAVE)
+
+
 
 ### Resources Used
 https://www.scrapingbee.com/blog/web-scraping-javascript/ - Options / Puppeteer
 https://codepen.io/JustSaas/pen/xYwLag - Cup loading image
 https://levelup.gitconnected.com/render-dynamic-content-in-nodejs-using-templates-a58cae681148 - Express
 https://stackoverflow.com/questions/244183/how-to-display-a-loading-screen-while-site-content-loads - Loading Page Via XMLHTTPRequest
+https://stackoverflow.com/questions/69604544/how-to-send-data-from-server-to-client-in-express - requesting / sending just JSON data to page

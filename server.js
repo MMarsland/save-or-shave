@@ -7,33 +7,13 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
-let initialTotalAmount = ""
-let donations = []
+let data = null;
+let donations = [];
 
-async function scrapeTotalAmount() {
-    try {
-        const URL = 'https://ca.movember.com/mospace/14089981?fundraiseLP=varB&gclid=Cj0KCQjwqoibBhDUARIsAH2OpWgJD4MaSzkcWAV1l-pOCHncMfDT9A2yTqWhH4Zti8QzT040hXAkLuAaApsoEALw_wcB'
-        const browser = await puppeteer.launch()
-        const page = await browser.newPage()
-        await page.goto(URL)
+let saveKeyword = "q";
+let shaveKeyword = "k"
 
-        const TOTAL_DONATIONS_SELECTOR = '#mospace-heroarea--fundraising-wrapper > div.mospace-heroarea--fundraising > div.mospace-heroarea--donations-target-amount-wrapper > h1';
-        
-        await page.waitForSelector(TOTAL_DONATIONS_SELECTOR);
 
-        const textContent = await page.$eval(TOTAL_DONATIONS_SELECTOR, el => el.textContent);
-
-        //const textContent = await (await page.evaluate(() => {return document.querySelector(TOTAL_DONATIONS_SELECTOR).textContent})).jsonValue();
-        //console.log('Total Amount = ' + textContent.jsonValue());
-
-        await browser.close()
-        initialTotalAmount = textContent
-        return textContent
-    } catch (error) {
-        console.error(error)
-        //res.status(400).send("Error while scraping total doncation data from Movember");
-    }
-}
 
 async function scrapeDonations() {
     try {
@@ -79,15 +59,28 @@ async function scrapeDonations() {
     }
 }
 
-scrapeTotalAmount()
-scrapeDonations()
+async function getShaveAndSaveAmount() {
+    await scrapeDonations()
+    console.log(donations)
+    saveAmount = 0
+    shaveAmount = 0
+
+    for (donation of donations) {
+        if (donation.message.toLowerCase().includes(saveKeyword)) {
+            saveAmount += parseFloat(donation.amount.replace("$", ""))
+        } else if (donation.message.toLowerCase().includes(shaveKeyword)) {
+            shaveAmount += parseFloat(donation.amount.replace("$", ""))
+        }
+    }
+    console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
+    return {saveAmount: saveAmount, shaveAmount: shaveAmount}
+}
 
 app.get("/", async (req, res) => {
     res.render("main");
 });
 
 app.get("/reloadDonations", async (req, res) => {
-    await scrapeTotalAmount()
     await scrapeDonations()
     res.render("donations", { donations: donations });
 });
@@ -97,12 +90,48 @@ app.get("/donations", async (req, res) => {
 });
 
 app.get('/fetch', async (req, res) => {
-    await scrapeTotalAmount()
-    await scrapeDonations()
-    res.json({ donations: donations })
-})
+    data = await getShaveAndSaveAmount()
+    res.json(data);
+});
+
+app.get('/fetchPreloaded', async (req, res) => {
+    if (data == null) {
+        data = await getShaveAndSaveAmount()
+    }
+    res.json(data);
+});
+
+app.get('/preloaded', async (req, res) => {
+    res.render("pre-loaded");
+});
 
 app.listen(3000, () => {
     console.log("server started on port 3000");
 });
 
+
+
+// async function scrapeTotalAmount() {
+//     try {
+//         const URL = 'https://ca.movember.com/mospace/14089981?fundraiseLP=varB&gclid=Cj0KCQjwqoibBhDUARIsAH2OpWgJD4MaSzkcWAV1l-pOCHncMfDT9A2yTqWhH4Zti8QzT040hXAkLuAaApsoEALw_wcB'
+//         const browser = await puppeteer.launch()
+//         const page = await browser.newPage()
+//         await page.goto(URL)
+
+//         const TOTAL_DONATIONS_SELECTOR = '#mospace-heroarea--fundraising-wrapper > div.mospace-heroarea--fundraising > div.mospace-heroarea--donations-target-amount-wrapper > h1';
+        
+//         await page.waitForSelector(TOTAL_DONATIONS_SELECTOR);
+
+//         const textContent = await page.$eval(TOTAL_DONATIONS_SELECTOR, el => el.textContent);
+
+//         //const textContent = await (await page.evaluate(() => {return document.querySelector(TOTAL_DONATIONS_SELECTOR).textContent})).jsonValue();
+//         //console.log('Total Amount = ' + textContent.jsonValue());
+
+//         await browser.close()
+//         initialTotalAmount = textContent
+//         return textContent
+//     } catch (error) {
+//         console.error(error)
+//         //res.status(400).send("Error while scraping total doncation data from Movember");
+//     }
+// }

@@ -14,7 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js -e js,ejs,css"
+    "start": "nodemon server.js -ee ejs, js"
   },
   "keywords": [],
   "author": "",
