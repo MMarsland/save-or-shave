@@ -238,6 +238,16 @@ footer {
   justify-content: flex-start;
 }
 
+.welcomeText {
+  margin: 1em;
+}
+
+.welcomeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 
 
