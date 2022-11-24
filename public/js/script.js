@@ -2,7 +2,7 @@
 
 async function getDonationsData(uri, username) {
     console.log(uri, username)
-    const res = await fetch(`http://localhost:3000/${uri}?username=${username}`);
+    const res = await fetch(`https://save-or-shave.herokuapp.com/${uri}?username=${username}`);
     const donationsData = await res.json();
 
     console.log("Got Data");
