@@ -10,14 +10,12 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "q";
+let saveKeyword = "b";
 let shaveKeyword = "k"
 
-
-
-async function scrapeDonations() {
+async function scrapeDonations(username) {
     try {
-        const URL = 'https://ca.movember.com/mospace/14089981?fundraiseLP=varB&gclid=Cj0KCQjwqoibBhDUARIsAH2OpWgJD4MaSzkcWAV1l-pOCHncMfDT9A2yTqWhH4Zti8QzT040hXAkLuAaApsoEALw_wcB'
+        const URL = `https://movember.com/m/${username}`
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
         await page.goto(URL)
@@ -55,12 +53,11 @@ async function scrapeDonations() {
         });
     } catch (error) {
         console.error(error)
-        //res.status(400).send("Error while scraping donations data from Movember");
     }
 }
 
-async function getShaveAndSaveAmount() {
-    await scrapeDonations()
+async function getShaveAndSaveAmount(username) {
+    await scrapeDonations(username)
     console.log(donations)
     saveAmount = 0
     shaveAmount = 0
@@ -76,10 +73,45 @@ async function getShaveAndSaveAmount() {
     return {saveAmount: saveAmount, shaveAmount: shaveAmount}
 }
 
-app.get("/", async (req, res) => {
-    res.render("main");
+/* DEV */
+app.get('/fetchPreloaded', async (req, res) => {
+    if (data == null) {
+        data = await getShaveAndSaveAmount(req.query.username)
+    }
+    res.json(data);
 });
 
+app.get('/preloaded/:username', async (req, res) => {
+    username = req.params.username;
+    res.render("pre-loaded", {username: username});
+});
+
+app.get('/content', async (req, res) => {
+    res.render("updatedContent", {username: "exampleuser"});
+});
+
+/* MAIN */
+app.get("/", async (req, res) => {
+    if (req.query.username) {
+        res.redirect(`/${req.query.username}`);
+    }
+    res.render("welcome");
+});
+
+app.get('/fetch', async (req, res) => {
+    console.log(req.query.username)
+    data = await getShaveAndSaveAmount(req.query.username)
+    console.log(data);
+    res.json(data);
+});
+
+app.get("/:username", async (req, res) => {
+    console.log(req.params.username)
+    username = req.params.username;
+    res.render("main", {username: username});
+});
+
+/* EXTRAS */
 app.get("/reloadDonations", async (req, res) => {
     await scrapeDonations()
     res.render("donations", { donations: donations });
@@ -89,22 +121,8 @@ app.get("/donations", async (req, res) => {
     res.render("donations", { donations: donations });
 });
 
-app.get('/fetch', async (req, res) => {
-    data = await getShaveAndSaveAmount()
-    res.json(data);
-});
 
-app.get('/fetchPreloaded', async (req, res) => {
-    if (data == null) {
-        data = await getShaveAndSaveAmount()
-    }
-    res.json(data);
-});
-
-app.get('/preloaded', async (req, res) => {
-    res.render("pre-loaded");
-});
-
+// Main starting function for the server
 app.listen(3000, () => {
     console.log("server started on port 3000");
 });

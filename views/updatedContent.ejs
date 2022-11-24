@@ -1,10 +1,38 @@
-<div id="content">
+<%- include('header.ejs') %>
+
+
+<div id="content" style="display: flex">
     <!-- Data Thermometer goes here -->
     <div class="titleContainer">
         <image class="titleStash" src="Movember Foundation_Iconic Mo_Black.png"></image>
         <div class="title">Save or Shave</div>
         <div class="username"><%=username%></div>
     </div>
+    <div class="displayContainer">
+        <div id="shaveDate"><h2>Dec 1st -----></h2></div>
+        <div id="thermometer">
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+            <div class="stackStashContainer"><image class="stackStash" src="Movember Foundation_Iconic Mo_Black.png"></div>
+
+        </div>
+        <div id="dates">
+            <h2>----- Dec 15th</h2>
+            <h2>----- Dec 10th</h2>
+            <h2>----- Dec 5th</h2>
+            <h2>----- Nov 30th</h2>
+            <h2>----- Nov 25th</h2>
+        </div>
+    </div>
+    <script>
+    /*
     <div class="displayContainer">
         <div class="endDateLabelContainer">
             <div id="endDateLabel">
@@ -50,4 +78,14 @@
             <h1>$0</h1>
         </div>   
     </div>
+    */
+    </script>
+    <footer>
+        <p>Save or Shave by Michael Marsland</p>
+        <p><a href="mailto:mmarsland@mac.com">mmarsland@mac.com</a></p>
+    </footer>
 </div>
+
+<script src="/js/script.js"></script>
+
+<%- include('footer.ejs') %>

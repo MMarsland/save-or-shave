@@ -1,7 +1,8 @@
 //console.log("This is coming from script.js");
 
-async function getDonationsData(uri) {
-    const res = await fetch(`http://localhost:3000/${uri}`);
+async function getDonationsData(uri, username) {
+    console.log(uri, username)
+    const res = await fetch(`http://localhost:3000/${uri}?username=${username}`);
     const donationsData = await res.json();
 
     console.log("Got Data");

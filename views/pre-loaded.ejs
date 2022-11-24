@@ -2,5 +2,5 @@
 <%- include('loading.ejs') %>
 <%- include('content.ejs') %>
 <script src="/js/script.js"></script>
-<script>getDonationsData('fetchPreloaded');</script>
+<script>getDonationsData('fetchPreloaded', "<%=username%>");</script>
 <%- include('footer.ejs') %>

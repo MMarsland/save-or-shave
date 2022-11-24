@@ -1,7 +1,7 @@
 :root {
-  --background-color: #262626;
-  --primary-blue: #2171B4;
-  --text-white: #fff;
+  --background-color: #fff;
+  --primary-blue: #7CA0B3;
+ --text-main: #000;
 }
 
 * {
@@ -12,7 +12,6 @@
 }
 
 html {
-  font-size: 62.5%;
   height: 100%;
   width: 100%
 }
@@ -21,12 +20,11 @@ body {
   font-family: "Lato", "Helvetica", Helvetica, sans-serif;
   background: var(--background-color);
   color: var(--primary-blue);
-  font-size: 1.8rem;
-  letter-spacing: 1px;
   height: 100%;
   width: 100%
 }
 
+/*
 .btn {
   display: inline-block;
   font-size: 1.5rem;
@@ -37,20 +35,14 @@ body {
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  color: var(--text-white);
+  color: var(--text-main);
   background-color: var(--primary-blue);
   cursor: pointer;
-}
-
-.link {
-  display: inline-block;
-  margin-bottom: 1rem;
-}
-
+}*/
 
 /* Custom Styles */
 
-/* Cup / Loading animation */
+/* Cup / Loading animation 
 .cup {
   position: absolute;
   top: 50%;
@@ -63,7 +55,7 @@ body {
   border-radius: 15px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background: url(https://image.ibb.co/fmHm66/wave.png);
+  background: url("../wave.png");
   background-position: 0px 350px;
   background-repeat: repeat-x;
   animation: filling 10s ease-in-out infinite;
@@ -86,7 +78,7 @@ body {
   0% {background-position: 200px 150px;}
   50% {background-position: 1700px 50px;}
   100% {background-position: 200px 150px;}
-}
+}*/
 
 
 .loadingContent {
@@ -101,46 +93,166 @@ body {
 
 .loadingText {
   width: fit-content;
-  color: var(--text-white);
+  color: var(--text-main);
   position: absolute;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+} 
+
+.loadingStash {
+  height: auto;
+  width: 25%;
+  margin-top: 5%;
+  animation: spinning 3s infinite;
 }
+
+@keyframes spinning {
+  0% {transform: rotate(0deg);}
+  25% {transform: rotate(5deg);}
+  75% {transform: rotate(-5deg);}
+  100% {transform: rotate(0deg);}
+}
+
+/* Main Content */
 
 #content {
   height: 100%;
   width: 100%;
   display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.container {
-  position: absolute;
-  height: 100%;
+.titleContainer {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 25%;
+}
+
+.titleStash {
+  height: auto;
+  width: 50%;
+  position: relative;
 }
 
 .title {
-  position: absolute;
+  position: relative;
   font-family: Georgia, serif;
-  font-size: 80px;
-  top: 50px;
-  color: var(--text-white);
+  font-size: 12vw;
+  color: var(--text-main);
 }
 
-.centered-container {
-  position: absolute;
+.username {
+  position: relative;
+  font-family: Georgia, serif;
+  font-size: 6vw;
+  color: var(--text-main);
+}
+
+.displayContainer {
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  margin-bottom: 5%;
 }
 
 #thermometer {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  flex-basis: 30%;
 }
 
+.stackStashContainer {
+  padding: 2%;
+  box-sizing: border-box;
+  height: 5%;
+  width: 60%;
+}
+
+.stackStash {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#shaveDate {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  white-space: nowrap;
+  margin-left: auto;
+  height: 100%
+}
+
+#shaveDate > h2 {
+  font-size: 4vw;
+}
+
+#dates {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  white-space: nowrap;
+  margin-right: auto;
+  height: 100%
+}
+
+#dates > h2 {
+  height: 5%;
+  font-size: 4vw;
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  text-align: center;
+}
+
+
+/* Welcome Page */
+.welcomePage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* THERMO */
+/*
 svg {
   z-index: 2;
   position: relative;
@@ -162,7 +274,7 @@ svg {
   display: flex;
   justify-content: space-between;
   margin: 0px -50px 0px -40px;
-  color: var(--text-white);
+  color: var(--text-main);
 }
 
 #dateLabels > h4 {
@@ -218,10 +330,10 @@ svg {
   left: 10px;
   top: 5px;
   z-index: 1;
-  background: url(https://image.ibb.co/fmHm66/wave.png);
+  background: url("../wave.png");
   background-size: cover;
   background-repeat: repeat-x;
-  animation: wave-motion 30s ease-in-out infinite; /* wave-fill 3s ease-in-out forwards */
+  animation: wave-motion 30s ease-in-out infinite;
   transition: all 3s;
   transform-origin: left top;
 }
@@ -243,4 +355,4 @@ svg {
   transition: all 3s;
   z-index: 1;
 }
-
+*/
