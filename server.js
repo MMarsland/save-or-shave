@@ -123,8 +123,13 @@ app.get("/donations", async (req, res) => {
 
 
 // Main starting function for the server
-app.listen(3000, () => {
-    console.log("server started on port 3000");
+//app.listen(3000, () => {
+//    console.log("server started on port 3000");
+//});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
 });
 
 
