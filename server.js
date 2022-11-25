@@ -128,7 +128,7 @@ app.get("/donations", async (req, res) => {
 //});
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, '192.168.1.89' || 'localhost', () => {
+app.listen(PORT, () => { //'192.168.1.89' || 'localhost',
   console.log(`Server listening on port ${PORT}...`);
 });
 
