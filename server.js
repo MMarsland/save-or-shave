@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "b";
-let shaveKeyword = "k"
+let saveKeyword = "SAVE";
+let shaveKeyword = "SHAVE"
 
 async function scrapeDonations(username) {
     try {
