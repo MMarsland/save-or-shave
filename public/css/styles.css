@@ -24,6 +24,11 @@ body {
   width: 100%
 }
 
+/* MEDIA FONT SIZES */
+
+@media all and (min-width: 800px) {
+}
+
 /*
 .btn {
   display: inline-block;
@@ -87,7 +92,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  color: black;
+  font-size: 4vw;
 }
 
 .welcomeText {
@@ -205,6 +212,10 @@ body {
   flex-basis: 20%;
 }
 
+#thermometer > .stackStashContainer:first-child {
+  animation: spinning 3s linear infinite;
+}
+
 .stackStashContainer {
   padding: 2%;
   box-sizing: border-box;
@@ -300,6 +311,7 @@ footer {
 footer > hr {
   width: 100%;
 }
+
 
 
 

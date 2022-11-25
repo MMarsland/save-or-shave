@@ -2,7 +2,11 @@
 
 async function getDonationsData(uri, username) {
     console.log(uri, username)
-    const res = await fetch(`http://localhost:8080/${uri}?username=${username}`);
+
+    //URL = "http://192.168.1.89:8080"; // DEV
+    URL = "https://save-or-shave.herokuapp.com" // Production
+
+    const res = await fetch(`${URL}/${uri}?username=${username}`);
     const donationsData = await res.json();
 
     console.log("Got Data");
