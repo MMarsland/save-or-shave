@@ -1,6 +1,6 @@
 <%- include('header.ejs') %>
 <%- include('loading.ejs') %>
-<%- include('newContent.ejs') %>
+<%- include('mobileContent.ejs') %>
 <script src="/js/script.js"></script>
-<script>getDonationsData('fetch', "<%=username%>");</script>
+<script>getDonationsData('fetch', "<%=username%>", "<%=url%>");</script>
 <%- include('footer.ejs') %>

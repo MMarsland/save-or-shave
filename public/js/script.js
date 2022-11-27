@@ -1,14 +1,21 @@
 //console.log("This is coming from script.js");
 
-async function getDonationsData(uri, username) {
+async function getDonationsData(uri, username, url) {
     console.log(uri, username)
 
     //URL = "http://192.168.1.89:8080"; // DEV
-    URL = "https://save-or-shave.herokuapp.com" // Production
-
-    const res = await fetch(`${URL}/${uri}?username=${username}`);
-    const donationsData = await res.json();
-
+    //URL = "https://save-or-shave.herokuapp.com" // Production
+    let res = null;
+    let donationsData = null;
+    try {
+        res = await fetch(`${url}/${uri}?username=${username}`);
+        donationsData = await res.json();
+    } catch (error) {
+        // Show Error Div
+        alert(error);
+        return
+    }
+    
     console.log("Got Data");
     console.log(donationsData);
 
@@ -18,11 +25,11 @@ async function getDonationsData(uri, username) {
     saveAmount = donationsData.saveAmount;
     shaveAmount = donationsData.shaveAmount;
 
-    dollarsPerLevel = 5;
+    dollarsPerLevel = 10;
 
-    unboundLevel = 10 + Math.ceil(((saveAmount - shaveAmount)/dollarsPerLevel));
+    unboundLevel = 7 + Math.ceil(((saveAmount - shaveAmount)/dollarsPerLevel));
 
-    level = Math.min(Math.max(unboundLevel, 0), 20)
+    level = Math.min(Math.max(unboundLevel, 0), 14)
 
     console.log("Save Amount: "+saveAmount);
     console.log("Shave Amount: "+shaveAmount);
@@ -33,22 +40,24 @@ async function getDonationsData(uri, username) {
     setDonationLevel(level);
 }
   
-function setDonationLevel(level) { //21 levels: 0 -> 20
+function setDonationLevel(level) { //15 levels: 0 -> 14
     shaveDate = ""
 
-    DAYS_IN_NOV = 30;
-    startDayInNov = 25;
-    if (level <= (DAYS_IN_NOV-startDayInNov)) {
-        shaveDate = "Nov " + getWithOrdinalSuffix(startDayInNov+level);
-    } else {
-        shaveDate = "Dec " + getWithOrdinalSuffix(((startDayInNov+level)%DAYS_IN_NOV));
-    }
+    //DAYS_IN_NOV = 30;
+    //startDayInNov = 30;
+    //if (level <= (DAYS_IN_NOV-startDayInNov)) {
+    //    shaveDate = "Nov " + getWithOrdinalSuffix(startDayInNov+level);
+    //} else {
+    //    shaveDate = "Dec " + getWithOrdinalSuffix(((startDayInNov+level)%DAYS_IN_NOV));
+    //}
+
+    shaveDate = "Dec " + getWithOrdinalSuffix((level+1));
 
     shaveDateLabel = document.querySelector("#shaveDate")
     shaveDateLabel.lastElementChild.innerHTML = `${shaveDate}`;
 
     // Position Shave Date Label
-    percentage = level * 4.762;
+    percentage = level * 6.667 - 3.334;
     shaveDateLabel.style.bottom = `${percentage}%`;
 
     // Add Moustashes

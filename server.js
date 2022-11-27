@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "SAVE";
-let shaveKeyword = "SHAVE"
+let saveKeyword = "target"//"SAVE";
+let shaveKeyword = "h"//"SHAVE"
 
 async function scrapeDonations(username) {
     try {
@@ -87,7 +87,7 @@ app.get('/preloaded/:username', async (req, res) => {
 });
 
 app.get('/content', async (req, res) => {
-    res.render("updatedContent", {username: "exampleuser"});
+    res.render("justContent", {username: "exampleuser"});
 });
 
 /* MAIN */
@@ -105,10 +105,23 @@ app.get('/fetch', async (req, res) => {
     res.json(data);
 });
 
+app.get("/instructions", async (req, res) => {
+    res.render("instructions");
+});
+
 app.get("/:username", async (req, res) => {
     console.log(req.params.username)
     username = req.params.username;
-    res.render("main", {username: username});
+
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const path = req.originalUrl;
+    const port = process.env.PORT || PORT;
+
+    const url = `${protocol}://${host}:${port}` //${path}
+    console.log(url)
+
+    res.render("main", {username: username, url: url});
 });
 
 /* EXTRAS */

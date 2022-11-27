@@ -21,12 +21,22 @@ body {
   background: var(--background-color);
   color: var(--primary-blue);
   height: 100%;
-  width: 100%
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* MEDIA FONT SIZES */
 
-@media all and (min-width: 800px) {
+.container {
+  max-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /*
@@ -94,7 +104,12 @@ body {
   align-items: center;
   justify-content: center;
   color: black;
-  font-size: 4vw;
+  font-size: 3vh;
+}
+
+.welcomeTitle {
+  margin-top: 1em;
+  text-align: center;
 }
 
 .welcomeText {
@@ -124,8 +139,10 @@ body {
   position: absolute;
   top: 30%;
   left: 50%;
+  width: 100%;
   transform: translate(-50%, -50%);
   text-align: center;
+  font-size: 4vh;
 } 
 
 .loadingStash {
@@ -165,26 +182,26 @@ body {
 
 .titleStash {
   height: auto;
-  width: 50%;
+  width: 45%;
   position: relative;
 }
 
 .title {
   position: relative;
   font-family: Georgia, serif;
-  font-size: 12vw;
+  font-size: 4vh;
   color: var(--text-main);
 }
 
 .username {
   position: relative;
   font-family: Georgia, serif;
-  font-size: 6vw;
+  font-size: 3vh;
   color: var(--text-main);
 }
 
 .displayContainer {
-  margin-top: 5%;
+  margin: 4% 0 4% 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -200,7 +217,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  margin-bottom: 5%;
+  margin: 2% 0 2% 0;
 }
 
 #thermometer {
@@ -209,7 +226,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  flex-basis: 20%;
+  flex-basis: 30%;
 }
 
 #thermometer > .stackStashContainer:first-child {
@@ -219,7 +236,7 @@ body {
 .stackStashContainer {
   padding: 2%;
   box-sizing: border-box;
-  height: 4.762%;
+  height: 6.667%;
   width: 100%;
   background-image: url("../Movember Foundation_Iconic Mo_Black.png");
   background-position: center; /* Center the image */
@@ -255,10 +272,10 @@ body {
 }
 
 #shaveDate > h2:first-child {
-  font-size: 4vw;
+  font-size: 3vh;
 }
 #shaveDate > h2:last-child {
-  font-size: 6vw;
+  font-size: 4vh;
 }
 
 #dates {
@@ -275,8 +292,8 @@ body {
 }
 
 #dates > h2 {
-  height: 4.762%;
-  font-size: calc(8px + 1vw);
+  height: 6.667%;
+  font-size: calc(8px + 1vh);
   display: flex;
   align-items: center;
   margin-left: 10%;
@@ -288,7 +305,7 @@ body {
 
 .amount {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-weight: bold;
@@ -296,10 +313,26 @@ body {
 }
 
 .amount > h2:first-child {
-  font-size: 5vw;
+  font-size: 4vh;
 }
 .amount > h2:last-child {
-  font-size: 6vw;
+  font-size: 4vh;
+  margin-left: 5px;
+}
+
+.instructionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.instructions {
+  text-align: center;
+  color: black;
+  font-size: 3vh;
 }
 
 footer {

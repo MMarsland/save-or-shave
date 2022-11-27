@@ -12,17 +12,15 @@ The website will graphically display the running results of the donation campaig
 - go to "localhost:3000" to view the hosted package
 - Will eventually be using Heroku to host the webpage (Or google hosting is possible too (I think))
 
-## TODO
+## TO
 
-- Username / URL passing to work for any Movember user
-- Add Username label
+- Google Cloud hosting
 
-- Update Loading Page (Moustashe logo filling instead of cup)
+- Display laoding erorrs / other errors to user
 
-- Add phone version with vertical thermo?
+- Improve Instructions Page
 
-- Decision on donation text Keywording (SHAVE, vs SAVE)
-
+- Better responsive display
 
 
 ### Resources Used
