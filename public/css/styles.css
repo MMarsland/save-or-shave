@@ -335,6 +335,11 @@ body {
   font-size: 3vh;
 }
 
+.introduction {
+  text-align: center;
+  color: black;
+}
+
 footer {
   margin-top:5%;
   text-align: center;

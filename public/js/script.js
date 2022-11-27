@@ -12,7 +12,8 @@ async function getDonationsData(uri, username, url) {
         donationsData = await res.json();
     } catch (error) {
         // Show Error Div
-        alert(error);
+        console.log("ERROR")
+        res = await fetch(`${url}/`);
         return
     }
     

@@ -12,14 +12,16 @@ The website will graphically display the running results of the donation campaig
 - go to "localhost:3000" to view the hosted package
 - Will eventually be using Heroku to host the webpage (Or google hosting is possible too (I think))
 
-## TO
+## TO-DO
 
+For ALPHA release:
 - Google Cloud hosting
 
-- Display laoding erorrs / other errors to user
+For BETA release:
+- Timeout when fetching from fake account
+- Display loading errors / other errors to user
 
 - Improve Instructions Page
-
 - Better responsive display
 
 
