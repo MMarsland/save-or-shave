@@ -1,5 +1,3 @@
-//console.log("This is coming from script.js");
-
 async function getDonationsData(uri, username, url) {
     console.log(uri, username)
 
