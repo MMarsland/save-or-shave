@@ -5,6 +5,8 @@ const https = require('https');
 const app = express();
 const fs = require('fs');
 
+const developmentMode = environment === 'development'
+
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -117,9 +119,9 @@ app.get("/:username", async (req, res) => {
     username = req.params.username;
 
     const protocol = req.protocol;
-    //if (protocol == "http") {
-    //    protocol = "https"
-    //}
+    if (!developmentMode && protocol == "http") {
+        protocol = "https"
+    }
     const host = req.hostname;
     const path = req.originalUrl;
     const port = process.env.PORT || PORT;
@@ -143,16 +145,8 @@ app.get("/donations", async (req, res) => {
 
 // Main starting function for the server
 const PORT = process.env.PORT || 8080;
-https.createServer(
-    // Provide the private and public key to the server by reading each
-    // file's content with the readFileSync() method.
-    {
-      key: fs.readFileSync("localhost-key.pem"),
-      cert: fs.readFileSync("localhost.pem"),
-    },
-    app
-  ).listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`);
+app.listen(PORT, () => { //'192.168.1.89' || 'localhost',
+  console.log(`Server listening on port ${PORT}...`);
 });
 
 // async function scrapeTotalAmount() {
