@@ -5,7 +5,7 @@ const https = require('https');
 const app = express();
 const fs = require('fs');
 
-const developmentMode = environment === 'development'
+const developmentMode = process.env.NODE_ENV === 'development'
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
