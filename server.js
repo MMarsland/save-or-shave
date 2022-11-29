@@ -135,7 +135,7 @@ app.get("/m/:username", async (req, res) => {
     const path = req.originalUrl;
     const port = process.env.PORT || PORT;
 
-    const url = `${protocol}://${host}:${port}` //${path}
+    const url = `${protocol}://${host}` //${path}
     //console.log(url)
 
     res.render("main", {username: username, url: url});
