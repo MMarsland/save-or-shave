@@ -103,8 +103,9 @@ app.get('/content', async (req, res) => {
 app.get("/", async (req, res) => {
     if (req.query.username) {
         res.redirect(`/${req.query.username}`);
+    } else {
+        res.render("welcome");
     }
-    res.render("welcome");
 });
 
 app.get('/fetch', async (req, res) => {
