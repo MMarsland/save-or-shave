@@ -15,11 +15,11 @@ The website will graphically display the running results of the donation campaig
 ## TO-DO
 
 For ALPHA release:
-- Google Cloud hosting
+- Puppeteer working on Heroku
 
 For BETA release:
 - Timeout when fetching from fake account
-- Display loading errors / other errors to user
+- Improve username errors / explain loading errors / other errors to user
 
 - Improve Instructions Page
 - Better responsive display
