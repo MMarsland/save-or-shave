@@ -101,12 +101,17 @@ app.get('/content', async (req, res) => {
 
 /* MAIN */
 app.get("/", async (req, res) => {
+    res.render("welcome");
+});
+
+app.get("/m", async (req, res) => {
     if (req.query.username) {
-        res.redirect(`/${req.query.username}`);
+        res.redirect(`/m/${req.query.username}`);
     } else {
-        res.render("welcome");
+        res.redirect(`/`);
     }
 });
+
 
 app.get('/fetch', async (req, res) => {
     console.log(req.query.username)
@@ -119,7 +124,7 @@ app.get("/instructions", async (req, res) => {
     res.render("instructions");
 });
 
-app.get("/:username", async (req, res) => {
+app.get("/m/:username", async (req, res) => {
     console.log(req.params.username)
     username = req.params.username;
 
