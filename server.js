@@ -5,7 +5,11 @@ const https = require('https');
 const app = express();
 const fs = require('fs');
 
-const developmentMode = process.env.NODE_ENV === 'development'
+
+console.log(process.env.NODE_ENV)
+const developmentMode = !(process.env.NODE_ENV === 'production')
+console.log(developmentMode)
+
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -118,8 +122,9 @@ app.get("/:username", async (req, res) => {
     console.log(req.params.username)
     username = req.params.username;
 
-    const protocol = req.protocol;
-    if (!developmentMode && protocol == "http") {
+    let protocol = req.protocol;
+    console.log(developmentMode)
+    if ( protocol == "http" && (!developmentMode)) {
         protocol = "https"
     }
     const host = req.hostname;
