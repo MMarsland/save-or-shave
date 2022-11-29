@@ -11,7 +11,10 @@ async function getDonationsData(uri, username, url) {
     } catch (error) {
         // Show Error Div
         console.log("ERROR")
-        res = await fetch(`${url}/`);
+        document.querySelector(".loadingText ").innerHTML = `An error has occurred, please try again with a different username`;
+        document.querySelector(".loadingStash").classList.add("errorStash");
+        document.querySelector(".loadingStash").classList.remove("loadingStash");
+        //res = await fetch(`${url}/`);
         return
     }
     

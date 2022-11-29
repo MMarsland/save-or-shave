@@ -31,3 +31,8 @@ https://codepen.io/JustSaas/pen/xYwLag - Cup loading image
 https://levelup.gitconnected.com/render-dynamic-content-in-nodejs-using-templates-a58cae681148 - Express
 https://stackoverflow.com/questions/244183/how-to-display-a-loading-screen-while-site-content-loads - Loading Page Via XMLHTTPRequest
 https://stackoverflow.com/questions/69604544/how-to-send-data-from-server-to-client-in-express - requesting / sending just JSON data to page
+
+### Useful Dev Info
+https://save-or-shave.herokuapp.com/ // site URL
+git push heroku HEAD:master // Push to heroku
+heroku logs --tail // see heroku logs from application

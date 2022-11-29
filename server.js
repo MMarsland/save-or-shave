@@ -20,13 +20,16 @@ let shaveKeyword = "h"//"SHAVE"
 
 async function scrapeDonations(username) {
     try {
+        console.log("Scraping Donations")
         const URL = `https://movember.com/m/${username}`
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
         await page.goto(URL)
 
         const DONATIONS_SELECTOR = "div.post-donation-info"
+        console.log("Puppeteer launched / Waiting for selector")
         await page.waitForSelector(DONATIONS_SELECTOR)
+        console.log("Evaluating")
         donations = await page.evaluate(() => {
             donations_elements = document.querySelectorAll("div.partial_newsfeed-post_donation")
             donations_array = Array.from(donations_elements)
@@ -46,24 +49,28 @@ async function scrapeDonations(username) {
                     trimmed_message = message.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
                 } catch {
                     //pass
+                    console.log("Error in the trimming")
                 }
-                    
+                console.log("Returning item")
                 return {
                     donator: trimmed_name,
                     amount: trimmed_amount,
                     message: trimmed_message
                 }
             })
+            console.log("Returning all donations")
             return donations_parsed
         });
     } catch (error) {
+        console.log("ERROR SCRAPING DONATIONS")
         console.error(error)
     }
 }
 
 async function getShaveAndSaveAmount(username) {
+    console.log("Getting Amounts")
     await scrapeDonations(username)
-    //console.log(donations)
+    console.log("Donations Scraped")
     saveAmount = 0
     shaveAmount = 0
 
@@ -74,6 +81,7 @@ async function getShaveAndSaveAmount(username) {
             shaveAmount += parseFloat(donation.amount.replace("$", ""))
         }
     }
+    console.log("Amounts Got")
     //console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
     return {saveAmount: saveAmount, shaveAmount: shaveAmount}
 }
@@ -133,15 +141,20 @@ app.get("/m/:username", async (req, res) => {
     }
     const host = req.hostname;
     const path = req.originalUrl;
-    const port = process.env.PORT || PORT;
+    const port = process.env.PORT || 3000;
 
-    const url = `${protocol}://${host}` //${path}
-    //console.log(url)
+    let url = `${protocol}://${host}` //${path}
+    console.log(developmentMode)
+    if (developmentMode) {
+        url = url + `:${port}`
+    }
+    console.log(url)
 
     res.render("main", {username: username, url: url});
 });
 
 /* EXTRAS */
+/*
 app.get("/reloadDonations", async (req, res) => {
     await scrapeDonations()
     res.render("donations", { donations: donations });
@@ -150,10 +163,10 @@ app.get("/reloadDonations", async (req, res) => {
 app.get("/donations", async (req, res) => {
     res.render("donations", { donations: donations });
 });
-
+*/
 
 // Main starting function for the server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { //'192.168.1.89' || 'localhost',
   console.log(`Server listening on port ${PORT}...`);
 });

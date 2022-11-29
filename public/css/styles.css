@@ -152,10 +152,24 @@ body {
   animation: spinning 3s linear infinite;
 }
 
+.errorStash {
+  height: auto;
+  width: 40%;
+  margin-top: 5%;
+  animation: errorSpinning 8s ease-in-out infinite;
+}
+
 @keyframes spinning {
   0% {transform: rotate(0deg);}
   25% {transform: rotate(5deg);}
   75% {transform: rotate(-5deg);}
+  100% {transform: rotate(0deg);}
+}
+
+@keyframes errorSpinning {
+  0% {transform: rotate(0deg);}
+  25% {transform: rotate(1000deg);}
+  75% {transform: rotate(-1000deg);}
   100% {transform: rotate(0deg);}
 }
 
