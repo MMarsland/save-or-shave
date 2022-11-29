@@ -15,7 +15,7 @@ The website will graphically display the running results of the donation campaig
 ## TO-DO
 
 For ALPHA release:
-- Puppeteer working on Heroku
+- Get puppeteer working on Heroku
 
 For BETA release:
 - Timeout when fetching from fake account
@@ -23,6 +23,7 @@ For BETA release:
 
 - Improve Instructions Page
 - Better responsive display
+- Add Beta feedback page
 
 
 ### Resources Used
