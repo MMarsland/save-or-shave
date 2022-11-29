@@ -23,11 +23,11 @@ async function scrapeDonations(username) {
         console.log("Scraping Donations")
         const URL = `https://movember.com/m/${username}`
         const browser = await puppeteer.launch({
-            args: [
+            'args' : [
               '--no-sandbox',
-              '--disable-setuid-sandbox',
-            ],
-        });
+              '--disable-setuid-sandbox'
+            ]
+          });
         const page = await browser.newPage()
         await page.goto(URL)
 
