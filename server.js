@@ -4,15 +4,16 @@ const puppeteer = require('puppeteer')
 const https = require('https');
 const app = express();
 const fs = require('fs');
+var favicon = require('serve-favicon');
 
-
-console.log(process.env.NODE_ENV)
+//console.log(process.env.NODE_ENV)
 const developmentMode = !(process.env.NODE_ENV === 'production')
-console.log(developmentMode)
+//console.log(developmentMode)
 
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname,'public','Movember Foundation_Iconic Mo_Black.png')));
 
 let data = null;
 let donations = [];
@@ -65,7 +66,7 @@ async function scrapeDonations(username) {
 
 async function getShaveAndSaveAmount(username) {
     await scrapeDonations(username)
-    console.log(donations)
+    //console.log(donations)
     saveAmount = 0
     shaveAmount = 0
 
@@ -76,7 +77,7 @@ async function getShaveAndSaveAmount(username) {
             shaveAmount += parseFloat(donation.amount.replace("$", ""))
         }
     }
-    console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
+    //console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
     return {saveAmount: saveAmount, shaveAmount: shaveAmount}
 }
 
@@ -114,9 +115,9 @@ app.get("/m", async (req, res) => {
 
 
 app.get('/fetch', async (req, res) => {
-    console.log(req.query.username)
+    //console.log(req.query.username)
     data = await getShaveAndSaveAmount(req.query.username)
-    console.log(data);
+    //console.log(data);
     res.json(data);
 });
 
@@ -125,11 +126,11 @@ app.get("/instructions", async (req, res) => {
 });
 
 app.get("/m/:username", async (req, res) => {
-    console.log(req.params.username)
+    //console.log(req.params.username)
     username = req.params.username;
 
     let protocol = req.protocol;
-    console.log(developmentMode)
+    //console.log(developmentMode)
     if ( protocol == "http" && (!developmentMode)) {
         protocol = "https"
     }
@@ -138,7 +139,7 @@ app.get("/m/:username", async (req, res) => {
     const port = process.env.PORT || PORT;
 
     const url = `${protocol}://${host}:${port}` //${path}
-    console.log(url)
+    //console.log(url)
 
     res.render("main", {username: username, url: url});
 });
