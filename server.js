@@ -1,10 +1,7 @@
 const express = require("express");
 const path = require("path");
 const puppeteer = require('puppeteer')
-const https = require('https');
 const app = express();
-const fs = require('fs');
-var favicon = require('serve-favicon');
 
 //console.log(process.env.NODE_ENV)
 const developmentMode = !(process.env.NODE_ENV === 'production')
@@ -13,7 +10,7 @@ const developmentMode = !(process.env.NODE_ENV === 'production')
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(favicon(path.join(__dirname,'public','Movember Foundation_Iconic Mo_Black.png')));
+
 
 let data = null;
 let donations = [];

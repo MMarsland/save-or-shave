@@ -238,7 +238,7 @@ body {
   box-sizing: border-box;
   height: 6.667%;
   width: 100%;
-  background-image: url("../Movember Foundation_Iconic Mo_Black.png");
+  background-image: url("/images/Movember Foundation_Iconic Mo_Black.png");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: contain; /* Resize the background image to cover the entire container */
