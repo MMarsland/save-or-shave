@@ -14,8 +14,8 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "target" //"SAVE";
-let shaveKeyword = "h" //"SHAVE"
+let saveKeyword = "SAVE" //"SAVE"
+let shaveKeyword = "SHAVE" //"SHAVE"
 
 async function scrapeDonations(username) {
     try {
@@ -27,7 +27,7 @@ async function scrapeDonations(username) {
 
             console.log("Evaluating")
 
-            donation_elements = dom.window.document.querySelectorAll("div.partial_newsfeed-post_donation") // ":not(previousCampaign)"
+            donation_elements = dom.window.document.querySelectorAll("div.partial_newsfeed-post_donation:not(previousCampaign)") // TODO: Not blocking previous campaign messages
 
             parsed_donations = []
             for (donation of donation_elements) {
@@ -78,9 +78,9 @@ async function getShaveAndSaveAmount(username) {
     shaveAmount = 0
 
     for (donation of donations) {
-        if (donation.message.toLowerCase().includes(saveKeyword)) {
+        if (donation.message.includes(saveKeyword)) {
             saveAmount += parseFloat(donation.amount.replace("$", ""))
-        } else if (donation.message.toLowerCase().includes(shaveKeyword)) {
+        } else if (donation.message.includes(shaveKeyword)) {
             shaveAmount += parseFloat(donation.amount.replace("$", ""))
         }
     }

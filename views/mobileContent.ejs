@@ -1,48 +1,51 @@
 <div id="content">
-    <!-- Data Thermometer goes here -->
-    <div class="titleContainer">
-        <div class="titleStashContainer">
-            <image class="titleStash" src="/images/Movember Foundation_Iconic Mo_Black.png"></image>
+    <div id="mainContent">
+        <!-- Data Thermometer goes here -->
+        <div class="titleContainer">
+            <div class="titleStashContainer">
+                <image class="titleStash" src="/images/Movember Foundation_Iconic Mo_Black.png"></image>
+            </div>
+            <div class="title">Save or Shave</div>
+            <div class="username"><%=username%></div>
+            <div class="donationLink"><a href="https://movember.com/m/<%=username%>">Donate and vote here</a></div>
+            
         </div>
-        <div class="title">Save or Shave</div>
-        <div class="username"><%=username%></div>
-        <div class="donationLink"><a href="https://movember.com/m/<%=username%>">Donate and vote here</a></div>
-        
-    </div>
-    <div class="displayContainer">
-        <div class="saveAmount amount"><h2>Save</h2><h2>$0</h2></div>
-        <div class="thermoContainer">
-            <div class="shaveDateContainer">
-                <div id="shaveDate"><h2>Shave Date</h2><h2>Dec 1st</h2></div>
+        <div class="displayContainer">
+            <div class="saveAmount amount"><h2>Save</h2><h2>$0</h2></div>
+            <div class="thermoContainer">
+                <div class="shaveDateContainer">
+                    <div id="shaveDate"><h2>Shave Date</h2><h2>Dec 1st</h2></div>
+                </div>
+                <div id="thermometer">
+                </div>
+                <div id="dates">
+                    <h2 class="insetDate">Dec 15th</h2>
+                    <h2>14th</h2>
+                    <h2>13th</h2>
+                    <h2>12th</h2>
+                    <h2>11th</h2>
+                    <h2>10th</h2>
+                    <h2>9th</h2>
+                    <h2 class="insetDate">Dec 8th</h2>
+                    <h2>7th</h2>
+                    <h2>6th</h2>
+                    <h2>5th</h2>
+                    <h2>4th</h2>
+                    <h2>3rd</h2>
+                    <h2>2nd</h2>
+                    <h2 class="insetDate">Dec 1th</h2>
+                </div>
             </div>
-            <div id="thermometer">
-            </div>
-            <div id="dates">
-                <h2 class="insetDate">Dec 15th</h2>
-                <h2>14th</h2>
-                <h2>13th</h2>
-                <h2>12th</h2>
-                <h2>11th</h2>
-                <h2>10th</h2>
-                <h2>9th</h2>
-                <h2 class="insetDate">Dec 8th</h2>
-                <h2>7th</h2>
-                <h2>6th</h2>
-                <h2>5th</h2>
-                <h2>4th</h2>
-                <h2>3rd</h2>
-                <h2>2nd</h2>
-                <h2 class="insetDate">Dec 1th</h2>
-            </div>
+            <div class="shaveAmount amount"><h2>Shave</h2><h2>$0</h2></div>
         </div>
-        <div class="shaveAmount amount"><h2>Shave</h2><h2>$0</h2></div>
-    </div>
-    <div class="instructionsLink"><a href="/instructions">Instructions</a></div>
+        <div class="instructionsLink"><a href="/instructions">Instructions</a></div>
 
-    <footer>
-        <hr>
-        <p>Save or Shave by Michael Marsland<br>@msm6</p>
-        <p>Alpha (November 2022)</p>
-        <p><a href="mailto:mmarsland@mac.com">mmarsland@mac.com</a></p>
-    </footer>
+        <footer>
+            <hr>
+            <p>Save or Shave by Michael Marsland<br>@msm6</p>
+            <p>Alpha (November 2022)</p>
+            <p><a href="mailto:mmarsland@mac.com">mmarsland@mac.com</a></p>
+        </footer>
+    </div>
+    <%- include('instructions.ejs') %>
 </div>

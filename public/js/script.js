@@ -27,7 +27,7 @@ async function getDonationsData(uri, username, url) {
     saveAmount = donationsData.saveAmount;
     shaveAmount = donationsData.shaveAmount;
 
-    dollarsPerLevel = 10;
+    dollarsPerLevel = 5;
 
     unboundLevel = 7 + Math.ceil(((saveAmount - shaveAmount)/dollarsPerLevel));
 
