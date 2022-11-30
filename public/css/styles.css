@@ -31,6 +31,7 @@ body {
 /* MEDIA FONT SIZES */
 
 .container {
+  min-height: 100%;
   max-width: 320px;
   display: flex;
   flex-direction: column;
@@ -374,24 +375,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
   margin: 5% 0 5% 0;
+  text-align: center;
+  color: black;
 }
 
 .instructions {
-  text-align: center;
-  color: black;
   font-size: 3vh;
 }
 
 .instructions > p:first-child {
   margin-bottom: 2%;
-}
-
-.introduction {
-  text-align: center;
-  color: black;
 }
 
 footer {
@@ -403,6 +398,11 @@ footer {
 footer > hr {
   width: 100%;
 }
+
+.instagramHandle:link { text-decoration: none; }
+.instagramHandle:visited { text-decoration: none; }
+.instagramHandle:hover { text-decoration: none; }
+.instagramHandle:active { text-decoration: none; }
 
 
 

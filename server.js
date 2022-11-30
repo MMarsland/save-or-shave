@@ -128,7 +128,7 @@ app.get('/fetch', async (req, res) => {
 });
 
 app.get("/instructions", async (req, res) => {
-    res.render("instructions");
+    res.render("instructionsPage");
 });
 
 app.get("/m/:username", async (req, res) => {
