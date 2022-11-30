@@ -7,8 +7,7 @@
             </div>
             <div class="title">Save or Shave</div>
             <div class="username"><%=username%></div>
-            <div class="donationLink"><a href="https://movember.com/m/<%=username%>">Donate and vote here</a></div>
-            
+            <button class="donationButton" onclick='location.href="https:\/\/ca.movember.com/donate/details?memberId=14089981"'>Donate and vote here</button> <!-- TODO: Links for any user https:/\/movember.com/m/<%=username%>"-->
         </div>
         <div class="displayContainer">
             <div class="saveAmount amount"><h2>Save</h2><h2>$0</h2></div>
@@ -38,14 +37,17 @@
             </div>
             <div class="shaveAmount amount"><h2>Shave</h2><h2>$0</h2></div>
         </div>
-        <div class="instructionsLink"><a href="/instructions">Instructions</a></div>
 
-        <footer>
-            <hr>
-            <p>Save or Shave by Michael Marsland<br><a href="https://www.instagram.com/msm6/" class="instagramHandle">@msm6</a></p>
-            <p>Beta Release (November 2022)</p>
-            <p><a href="mailto:mmarsland@mac.com">mmarsland@mac.com</a></p>
-        </footer>
+        
     </div>
+
     <%- include('instructions.ejs') %>
+    <button class="button-white" onclick='location.href="/info"'>Read More >></button>
+    <!--<footer>
+        <hr>
+        <p>Save or Shave by Michael Marsland<br><a href="https://www.instagram.com/msm6/" class="instagramHandle">@msm6</a></p>
+        <p>Beta Release (November 2022)</p>
+        <p><a href="mailto:mmarsland@mac.com">mmarsland@mac.com</a></p>
+    </footer>-->
+
 </div>

@@ -14,8 +14,8 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "SAVE" //"SAVE"
-let shaveKeyword = "SHAVE" //"SHAVE"
+let saveKeyword = "save" //"SAVE"
+let shaveKeyword = "shave" //"SHAVE"
 
 async function scrapeDonations(username) {
     try {
@@ -78,10 +78,10 @@ async function getShaveAndSaveAmount(username) {
     shaveAmount = 0
 
     for (donation of donations) {
-        if (donation.message.includes(saveKeyword)) {
-            saveAmount += parseFloat(donation.amount.replace("$", ""))
-        } else if (donation.message.includes(shaveKeyword)) {
+        if (donation.message.toLowerCase().includes(shaveKeyword)) {
             shaveAmount += parseFloat(donation.amount.replace("$", ""))
+        } else if (donation.message.toLowerCase().includes(saveKeyword)) {
+            saveAmount += parseFloat(donation.amount.replace("$", ""))
         }
     }
     console.log("Amounts Got")
@@ -127,10 +127,6 @@ app.get('/fetch', async (req, res) => {
     res.json(data);
 });
 
-app.get("/instructions", async (req, res) => {
-    res.render("instructionsPage");
-});
-
 app.get("/m/:username", async (req, res) => {
     username = req.params.username;
 
@@ -150,6 +146,10 @@ app.get("/m/:username", async (req, res) => {
     console.log(url)
 
     res.render("main", {username: username, url: url});
+});
+
+app.get("/info", async (req, res) => {
+    res.render("info");
 });
 
 /* EXTRAS */
