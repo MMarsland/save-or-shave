@@ -1,12 +1,11 @@
 const express = require("express");
 const path = require("path");
-const puppeteer = require('puppeteer')
+const got = require('got');
+const { JSDOM } = require("jsdom");
+
 const app = express();
 
-//console.log(process.env.NODE_ENV)
 const developmentMode = !(process.env.NODE_ENV === 'production')
-//console.log(developmentMode)
-
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -15,31 +14,23 @@ app.use(express.static(path.join(__dirname, "public")));
 let data = null;
 let donations = [];
 
-let saveKeyword = "target"//"SAVE";
-let shaveKeyword = "h"//"SHAVE"
+let saveKeyword = "target" //"SAVE";
+let shaveKeyword = "h" //"SHAVE"
 
 async function scrapeDonations(username) {
     try {
-        console.log("Scraping Donations")
         const URL = `https://movember.com/m/${username}`
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox','--disable-setuid-sandbox'],
-        });
-        const page = await browser.newPage()
-        await page.goto(URL)
 
-        const DONATIONS_SELECTOR = "div.post-donation-info"
-        console.log("Puppeteer launched / Waiting for selector")
-        await page.waitForSelector(DONATIONS_SELECTOR)
-        console.log("Evaluating")
-        donations = await page.evaluate(() => {
-            donations_elements = document.querySelectorAll("div.partial_newsfeed-post_donation")
-            donations_array = Array.from(donations_elements)
-            for (donation of donations_array) {
-                print_donation = donation
-            }
-            donations_parsed = donations_array.map(donation => {
+        await got(URL).then(response => {
+
+            const dom = new JSDOM(response.body);
+
+            console.log("Evaluating")
+
+            donation_elements = dom.window.document.querySelectorAll("div.partial_newsfeed-post_donation") // ":not(previousCampaign)"
+
+            parsed_donations = []
+            for (donation of donation_elements) {
                 donator = donation.querySelector("div.post-donation-info--from-name")
                 amount = donation.querySelector(".post-donation-info--amount")
                 message = donation.querySelector(".post-donation-info--message")
@@ -49,20 +40,29 @@ async function scrapeDonations(username) {
                 try {
                     trimmed_name = donator.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
                     trimmed_amount = amount.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
-                    trimmed_message = message.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
-                } catch {
+                    if(message) {
+                        trimmed_message = message.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
+                    }
+                } catch(error) {
                     //pass
                     console.log("Error in the trimming")
+                    console.log(error)
+
                 }
                 console.log("Returning item")
-                return {
+                parsed_donations.push({
                     donator: trimmed_name,
                     amount: trimmed_amount,
                     message: trimmed_message
-                }
-            })
+                })
+            }                          
             console.log("Returning all donations")
-            return donations_parsed
+            console.log(parsed_donations)
+            donations = parsed_donations;
+            return parsed_donations;
+
+        }).catch(err => {
+            console.log(err);
         });
     } catch (error) {
         console.log("ERROR SCRAPING DONATIONS")
@@ -85,7 +85,7 @@ async function getShaveAndSaveAmount(username) {
         }
     }
     console.log("Amounts Got")
-    //console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
+    console.log({saveAmount: saveAmount, shaveAmount: shaveAmount})
     return {saveAmount: saveAmount, shaveAmount: shaveAmount}
 }
 
@@ -123,9 +123,7 @@ app.get("/m", async (req, res) => {
 
 
 app.get('/fetch', async (req, res) => {
-    //console.log(req.query.username)
     data = await getShaveAndSaveAmount(req.query.username)
-    //console.log(data);
     res.json(data);
 });
 
@@ -134,16 +132,14 @@ app.get("/instructions", async (req, res) => {
 });
 
 app.get("/m/:username", async (req, res) => {
-    //console.log(req.params.username)
     username = req.params.username;
 
     let protocol = req.protocol;
-    //console.log(developmentMode)
     if ( protocol == "http" && (!developmentMode)) {
         protocol = "https"
     }
     const host = req.hostname;
-    const path = req.originalUrl;
+    //const path = req.originalUrl;
     const port = process.env.PORT || 3000;
 
     let url = `${protocol}://${host}` //${path}
@@ -170,31 +166,6 @@ app.get("/donations", async (req, res) => {
 
 // Main starting function for the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => { //'192.168.1.89' || 'localhost',
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
-
-// async function scrapeTotalAmount() {
-//     try {
-//         const URL = 'https://ca.movember.com/mospace/14089981?fundraiseLP=varB&gclid=Cj0KCQjwqoibBhDUARIsAH2OpWgJD4MaSzkcWAV1l-pOCHncMfDT9A2yTqWhH4Zti8QzT040hXAkLuAaApsoEALw_wcB'
-//         const browser = await puppeteer.launch()
-//         const page = await browser.newPage()
-//         await page.goto(URL)
-
-//         const TOTAL_DONATIONS_SELECTOR = '#mospace-heroarea--fundraising-wrapper > div.mospace-heroarea--fundraising > div.mospace-heroarea--donations-target-amount-wrapper > h1';
-        
-//         await page.waitForSelector(TOTAL_DONATIONS_SELECTOR);
-
-//         const textContent = await page.$eval(TOTAL_DONATIONS_SELECTOR, el => el.textContent);
-
-//         //const textContent = await (await page.evaluate(() => {return document.querySelector(TOTAL_DONATIONS_SELECTOR).textContent})).jsonValue();
-//         //console.log('Total Amount = ' + textContent.jsonValue());
-
-//         await browser.close()
-//         initialTotalAmount = textContent
-//         return textContent
-//     } catch (error) {
-//         console.error(error)
-//         //res.status(400).send("Error while scraping total doncation data from Movember");
-//     }
-// }

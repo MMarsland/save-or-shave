@@ -15,7 +15,7 @@ The website will graphically display the running results of the donation campaig
 ## TO-DO
 
 For ALPHA release:
-- Get puppeteer working on Heroku
+- Switch from puppeteer to Cheerio or JSDOM / other scraping / parsing technique
 
 For BETA release:
 - Timeout when fetching from fake account
