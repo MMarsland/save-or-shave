@@ -10,20 +10,20 @@ The website will graphically display the running results of the donation campaig
 - Follow Tutorials listed below to install the required NodeJS packages (Node, npm, express, puppeteer, etc...)
 - Use "npm start" to start the server (in dev mode with nodemon to auto-reload)
 - go to "localhost:3000" to view the hosted package
-- Will eventually be using Heroku to host the webpage (Or google hosting is possible too (I think))
+- Hosted on Google Cloud App Engine
 
 ## TO-DO
 
-For ALPHA release:
-- Switch from puppeteer to Cheerio or JSDOM / other scraping / parsing technique
+For Version 2:
+- Switch to more advanced scraping library capable of scraping dynamic sites with buttons
 
-For BETA release:
-- Timeout when fetching from fake account
 - Improve username errors / explain loading errors / other errors to user
+- Timeout when fetching from fake account
+- Better responsive display and display for desktop
 
-- Improve Instructions Page
-- Better responsive display
-- Add Beta feedback page
+Known Bugs:
+- Does not currently scrape donations overflowed and hidden behind the "See More" button on the Movember page.
+
 
 
 ### Resources Used
@@ -34,6 +34,4 @@ https://stackoverflow.com/questions/244183/how-to-display-a-loading-screen-while
 https://stackoverflow.com/questions/69604544/how-to-send-data-from-server-to-client-in-express - requesting / sending just JSON data to page
 
 ### Useful Dev Info
-https://save-or-shave.herokuapp.com/ // site URL
-git push heroku HEAD:master // Push to heroku
-heroku logs --tail // see heroku logs from application
+The site is now hosted on Google App Engine and avaliable at [https://save-or-shave-v2.uw.r.appspot.com/m/mmarsland](https://save-or-shave-v2.uw.r.appspot.com/m/mmarsland)
